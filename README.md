@@ -1,2 +1,2 @@
 # Chat-with-Multiple-Pdfs
-![PDF-LangChain.jpg]
+![](PDF-LangChain.jpg)
