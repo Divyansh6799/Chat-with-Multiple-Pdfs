@@ -49,7 +49,7 @@ bot_template = '''
     background-color: var(--chat-bg, #f5f5f5);
     border-radius: 12px;
     padding: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     max-width: 100%;
     position: relative;
