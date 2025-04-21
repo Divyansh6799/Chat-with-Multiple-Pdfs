@@ -12,6 +12,8 @@ from htmlTemplates import css, bot_template, user_template
 from langchain.llms import HuggingFaceHub
 from transformers import AutoTokenizer, AutoModel
 import os
+import uuid
+
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
@@ -71,6 +73,24 @@ def get_conversation_chain(vectorstore):
 
 def handle_userinput(user_question):
     try:
+        # Generate a unique ID for each message block to avoid conflicts
+        message_id = str(uuid.uuid4()).replace("-", "")
+        bot_template = f"""
+        <div style="border:1px solid #ccc; padding:10px; border-radius:8px; position:relative;" id="{message_id}">
+            <p style="margin:0;" id="msg_{message_id}">{message.content}</p>
+            <button onclick="copyToClipboard('{message_id}')" style="position:absolute; top:10px; right:10px;">📋 Copy</button>
+        </div>
+        <script>
+        function copyToClipboard(id) {{
+            const text = document.getElementById('msg_' + id).innerText;
+            navigator.clipboard.writeText(text).then(function() {{
+                alert('Copied to clipboard!');
+            }}, function(err) {{
+                alert('Error copying text: ' + err);
+            }});
+        }}
+        </script>
+        """
         response = st.session_state.conversation({'question': user_question})
         st.session_state.chat_history = response['chat_history']
         for i, message in enumerate(st.session_state.chat_history):
@@ -78,8 +98,9 @@ def handle_userinput(user_question):
                 st.markdown(user_template.replace(
                     "{{MSG}}", message.content), unsafe_allow_html=True)
             else:
-                st.markdown(bot_template.replace(
-                    "{{MSG}}", message.content), unsafe_allow_html=True)
+                st.markdown(bot_template, unsafe_allow_html=True)
+                # st.markdown(bot_template.replace(
+                #     "{{MSG}}", message.content), unsafe_allow_html=True)
     except TypeError as e:
         # Handle the TypeError and display an error message
         print(f"TypeError: {e}")
@@ -94,7 +115,7 @@ def handle_userinput(user_question):
 def main():
     # load_dotenv()
     # Set the page configuration
-    st.set_page_config(page_title="Chat with multiple PDFs",page_icon=":books:")
+    st.set_page_config(page_title="PDFs Gyani | Chat with us",page_icon=":books:")
     st.write(css, unsafe_allow_html=True)
 
     if "conversation" not in st.session_state:
