@@ -89,7 +89,7 @@ def handle_userinput(user_question):
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
 
                 components.html(rendered_html, height=150, scrolling=False)
-                
+
                 # Use st.markdown to see the raw HTML in debug
                 # st.code(rendered_html, language="html")
 
@@ -140,11 +140,11 @@ def main():
             
                 # get the text chunks
                 text_chunks = get_text_chunks(pdf_text)
-                # st.write("Text Chunks:", text_chunks)
+                st.write("Text Chunks:", text_chunks)
 
                 # create vector store
                 vectorstore = get_vectorstore(text_chunks)
-                # st.write("Vectorstore created successfully!", vectorstore)
+                st.write("Vectorstore created successfully!", vectorstore)
                 st.write("Vectorstore created successfully! Now you can ask questions about your documents!")
                 
                 # create conversation chain
