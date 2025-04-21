@@ -13,6 +13,8 @@ from langchain.llms import HuggingFaceHub
 from transformers import AutoTokenizer, AutoModel
 import os
 
+openai_api_key = st.secrets["OPENAI_API_KEY"]
+hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 def get_pdf_text(uploaded_files):
     """Extract text from the uploaded PDF files."""
