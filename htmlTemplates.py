@@ -62,70 +62,69 @@ bot_template = '''
              style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover;">
     </div>
 
-    <!-- Message bubble + copy button -->
-    <div style="flex-grow: 1; display: flex; flex-direction: column; position: relative;">
-        
-        <!-- Message text -->
+    <!-- Message bubble with button and tooltip inside -->
+    <div style="flex-grow: 1; position: relative;">
+        <!-- Message bubble -->
         <div class="message" id="msg_{{ID}}" style="
             background-color: var(--bubble-bg, #ffffff);
-            padding: 12px 16px;
+            padding: 16px 48px 16px 16px;
             border-radius: 10px;
             font-size: 16px;
             line-height: 1.6;
             word-wrap: break-word;
             overflow-wrap: break-word;
             color: var(--bubble-text, #000);
-        ">{{MSG}}</div>
-        
-        <!-- Copy button -->
-        <button onclick="copyToClipboard('{{ID}}')" style="
-            position: absolute;
-            top: 6px;
-            right: -42px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            padding: 6px 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        " title="Copy to clipboard">📋</button>
-
-        <!-- ✅ Copied tooltip -->
-        <span id="tooltip_{{ID}}" style="
-            display: none;
-            position: absolute;
-            top: 10px;
-            right: -110px;
-            background: #4caf50;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
         ">
-            ✅ Copied!
-        </span>
+            {{MSG}}
+
+            <!-- Copy button INSIDE bubble -->
+            <button onclick="copyToClipboard('{{ID}}')" style="
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: #f0f0f0;
+                border: 1px solid #ccc;
+                border-radius: 50%;
+                padding: 5px 7px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background 0.2s ease;
+            " title="Copy to clipboard">📋</button>
+
+            <!-- ✅ Copied tooltip inside bubble -->
+            <span id="tooltip_{{ID}}" style="
+                display: none;
+                position: absolute;
+                top: 8px;
+                right: 50px;
+                background: #4caf50;
+                color: white;
+                padding: 3px 8px;
+                border-radius: 6px;
+                font-size: 12px;
+                white-space: nowrap;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            ">
+                ✅ Copied!
+            </span>
+        </div>
     </div>
 </div>
 
-<!-- JS for copy and tooltip -->
 <script>
 function copyToClipboard(id) {
     const el = document.getElementById('msg_' + id);
     const tooltip = document.getElementById('tooltip_' + id);
 
     if (!el || !tooltip) {
-        console.error('❌ Could not find message or tooltip element for ID:', id);
+        console.error('❌ Could not find message or tooltip for ID:', id);
         return;
     }
 
     const text = el.innerText;
     navigator.clipboard.writeText(text).then(function() {
-        // Show tooltip
         tooltip.style.display = 'inline-block';
-        // Hide after 1.5 seconds
         setTimeout(() => {
             tooltip.style.display = 'none';
         }, 1500);
@@ -157,70 +156,69 @@ user_template = '''
              style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover;">
     </div>
 
-    <!-- Message bubble + copy button -->
-    <div style="flex-grow: 1; display: flex; flex-direction: column; position: relative;">
-        
-        <!-- Message text -->
+    <!-- Message bubble with button and tooltip inside -->
+    <div style="flex-grow: 1; position: relative;">
+        <!-- Message bubble -->
         <div class="message" id="msg_{{ID}}" style="
             background-color: var(--bubble-bg, #ffffff);
-            padding: 12px 16px;
+            padding: 16px 48px 16px 16px;
             border-radius: 10px;
             font-size: 16px;
             line-height: 1.6;
             word-wrap: break-word;
             overflow-wrap: break-word;
             color: var(--bubble-text, #000);
-        ">{{MSG}}</div>
-        
-        <!-- Copy button -->
-        <button onclick="copyToClipboard('{{ID}}')" style="
-            position: absolute;
-            top: 6px;
-            right: -42px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            padding: 6px 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        " title="Copy to clipboard">📋</button>
-
-        <!-- ✅ Copied tooltip -->
-        <span id="tooltip_{{ID}}" style="
-            display: none;
-            position: absolute;
-            top: 10px;
-            right: -110px;
-            background: #4caf50;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
         ">
-            ✅ Copied!
-        </span>
+            {{MSG}}
+
+            <!-- Copy button INSIDE bubble -->
+            <button onclick="copyToClipboard('{{ID}}')" style="
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: #f0f0f0;
+                border: 1px solid #ccc;
+                border-radius: 50%;
+                padding: 5px 7px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background 0.2s ease;
+            " title="Copy to clipboard">📋</button>
+
+            <!-- ✅ Copied tooltip inside bubble -->
+            <span id="tooltip_{{ID}}" style="
+                display: none;
+                position: absolute;
+                top: 8px;
+                right: 50px;
+                background: #4caf50;
+                color: white;
+                padding: 3px 8px;
+                border-radius: 6px;
+                font-size: 12px;
+                white-space: nowrap;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            ">
+                ✅ Copied!
+            </span>
+        </div>
     </div>
 </div>
 
-<!-- JS for copy and tooltip -->
 <script>
 function copyToClipboard(id) {
     const el = document.getElementById('msg_' + id);
     const tooltip = document.getElementById('tooltip_' + id);
 
     if (!el || !tooltip) {
-        console.error('❌ Could not find message or tooltip element for ID:', id);
+        console.error('❌ Could not find message or tooltip for ID:', id);
         return;
     }
 
     const text = el.innerText;
     navigator.clipboard.writeText(text).then(function() {
-        // Show tooltip
         tooltip.style.display = 'inline-block';
-        // Hide after 1.5 seconds
         setTimeout(() => {
             tooltip.style.display = 'none';
         }, 1500);

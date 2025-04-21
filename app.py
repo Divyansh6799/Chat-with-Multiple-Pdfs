@@ -86,7 +86,7 @@ def handle_userinput(user_question):
                 message_id = str(uuid.uuid4()).replace("-", "")
                 # Replace both placeholders
                 rendered_html = user_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-                components.html(rendered_html, height=200,width=200, scrolling=False)
+                components.html(rendered_html, height=200, scrolling=False)
 
                 # st.markdown(user_template.replace(
                 #     "{{MSG}}", message.content), unsafe_allow_html=True)
@@ -94,7 +94,7 @@ def handle_userinput(user_question):
                 message_id = str(uuid.uuid4()).replace("-", "")
                 # Replace both placeholders
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-                components.html(rendered_html, height=200,width=200, scrolling=False)
+                components.html(rendered_html, height=200, scrolling=False)
 
                 # Use st.markdown to see the raw HTML in debug
                 # st.code(rendered_html, language="html")
