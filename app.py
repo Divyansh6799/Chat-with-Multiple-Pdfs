@@ -102,7 +102,8 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    st.header("Chat with Multiple Pdf :books:")
+    st.header("PDFs Gyani :books:")
+    st.subheader("Chat with your PDFs using Langchain and Streamlit")
     user_question = st.chat_input("Ask a question about your documents:")
     if user_question:
         handle_userinput(user_question)
@@ -124,8 +125,8 @@ def main():
 
                 # create vector store
                 vectorstore = get_vectorstore(text_chunks)
-                st.write("Vectorstore created successfully!", vectorstore)
-                st.write("Now you can ask questions about your documents!")
+                # st.write("Vectorstore created successfully!", vectorstore)
+                st.write("Vectorstore created successfully! Now you can ask questions about your documents!")
                 
                 # create conversation chain
                 st.session_state.conversation = get_conversation_chain(vectorstore)
