@@ -1,5 +1,5 @@
 import streamlit as st
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 # from langchain.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
@@ -92,7 +92,7 @@ def handle_userinput(user_question):
 
 
 def main():
-    load_dotenv()
+    # load_dotenv()
     # Set the page configuration
     st.set_page_config(page_title="Chat with multiple PDFs",page_icon=":books:")
     st.write(css, unsafe_allow_html=True)
