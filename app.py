@@ -83,21 +83,24 @@ def handle_userinput(user_question):
         st.session_state.chat_history = response['chat_history']
         for i, message in enumerate(st.session_state.chat_history):
             if i % 2 == 0:
-                st.markdown(user_template.replace(
-                    "{{MSG}}", message.content), unsafe_allow_html=True)
+                message_id = str(uuid.uuid4()).replace("-", "")
+                # Replace both placeholders
+                rendered_html = user_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
+                components.html(rendered_html, height=150, scrolling=True)
+                
+                # st.markdown(user_template.replace(
+                #     "{{MSG}}", message.content), unsafe_allow_html=True)
             else:
                 message_id = str(uuid.uuid4()).replace("-", "")
                 # Replace both placeholders
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-
-                components.html(rendered_html, height=150, scrolling=False)
+                components.html(rendered_html, height=150, scrolling=True)
 
                 # Use st.markdown to see the raw HTML in debug
                 # st.code(rendered_html, language="html")
 
                 # Render the actual UI
                 # st.markdown(rendered_html, unsafe_allow_html=True)
-
 
                 # st.markdown(bot_template.replace(
                 #     "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
