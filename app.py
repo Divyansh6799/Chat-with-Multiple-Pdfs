@@ -71,6 +71,9 @@ def get_conversation_chain(vectorstore):
     )
     return conversation_chain
 
+import streamlit.components.v1 as components
+
+
 def handle_userinput(user_question):
     try:
 
@@ -85,13 +88,15 @@ def handle_userinput(user_question):
                 # Replace both placeholders
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
 
+                components.html(rendered_html, height=150, scrolling=False)
+                
                 # Use st.markdown to see the raw HTML in debug
                 # st.code(rendered_html, language="html")
 
                 # Render the actual UI
-                st.markdown(rendered_html, unsafe_allow_html=True)
+                # st.markdown(rendered_html, unsafe_allow_html=True)
 
-                
+
                 # st.markdown(bot_template.replace(
                 #     "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
     except TypeError as e:
