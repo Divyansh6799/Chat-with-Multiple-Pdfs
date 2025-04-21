@@ -89,7 +89,7 @@ def handle_userinput(user_question):
                 st.code(rendered_html, language="html")
 
                 # Render the actual UI
-                st.markdown(rendered_html, unsafe_allow_html=True)
+                # st.markdown(rendered_html, unsafe_allow_html=True)
                 # st.markdown(bot_template.replace(
                 #     "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
     except TypeError as e:
