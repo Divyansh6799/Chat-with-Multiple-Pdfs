@@ -28,9 +28,10 @@ css = '''
 '''
 
 bot_template = '''
-<div class="chat-message bot" 
-    <div class="avatar">
-        <img src="https://i.ibb.co/cN0nmSj/Screenshot-2023-05-28-at-02-37-21.png">
+<div class="chat-message bot" style="position: relative; margin-bottom: 20px; display: flex; align-items: flex-start;">
+    <div class="avatar" style="margin-right: 10px;">
+        <img src="https://i.ibb.co/cN0nmSj/Screenshot-2023-05-28-at-02-37-21.png"
+             style="max-height: 48px; max-width: 48px; border-radius: 50%; object-fit: cover;">
     </div>
     <div style="flex-grow: 1; position: relative;">
         <div class="message" id="msg_{{ID}}" style="padding-right: 40px;">{{MSG}}</div>

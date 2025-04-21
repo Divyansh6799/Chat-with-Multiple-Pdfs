@@ -146,7 +146,7 @@ def main():
 
                 # create vector store
                 vectorstore = get_vectorstore(text_chunks)
-                st.write("Vectorstore created successfully!", vectorstore)
+                # st.write("Vectorstore created successfully!", vectorstore)
                 st.write("Vectorstore created successfully! Now you can ask questions about your documents!")
                 
                 # create conversation chain
