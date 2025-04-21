@@ -1,3 +1,5 @@
+# This file contains the HTML templates used for rendering chat messages in a web application.
+# The templates are designed to display messages from both the user and the bot in a visually appealing manner.
 css = '''
 <style>
 .chat-message {
@@ -25,13 +27,26 @@ css = '''
 }
 '''
 
+
 bot_template = '''
 <div class="chat-message bot">
     <div class="avatar">
         <img src="https://i.ibb.co/cN0nmSj/Screenshot-2023-05-28-at-02-37-21.png" style="max-height: 78px; max-width: 78px; border-radius: 50%; object-fit: cover;">
     </div>
     <div class="message">{{MSG}}</div>
+    <button onclick="copyToClipboard('{message_id}')" style="position:absolute; top:10px; right:10px;">📋 Copy</button>
 </div>
+
+<script>
+function copyToClipboard(id) {{
+    const text = document.getElementById('msg_' + id).innerText;
+        navigator.clipboard.writeText(text).then(function() {{
+            alert('Copied to clipboard!');
+        }}, function(err) {{
+            alert('Error copying text: ' + err);
+        }});
+}}
+</script>
 '''
 
 user_template = '''
