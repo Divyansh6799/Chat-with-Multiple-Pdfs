@@ -27,6 +27,9 @@ css = '''
 }
 '''
 
+# Generate a unique ID for each message block to avoid conflicts
+import uuid
+message_id = str(uuid.uuid4()).replace("-", "")
 
 bot_template = '''
 <div class="chat-message bot">

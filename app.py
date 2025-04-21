@@ -73,8 +73,7 @@ def get_conversation_chain(vectorstore):
 
 def handle_userinput(user_question):
     try:
-        # Generate a unique ID for each message block to avoid conflicts
-        message_id = str(uuid.uuid4()).replace("-", "")
+
         response = st.session_state.conversation({'question': user_question})
         st.session_state.chat_history = response['chat_history']
         for i, message in enumerate(st.session_state.chat_history):
