@@ -35,7 +35,7 @@ bot_template = '''
     <div class="message" id="msg_{{ID}}">{{MSG}}</div>
     <button onclick="copyToClipboard('{{ID}}')" style="position:absolute; top:10px; right:10px;">📋 Copy</button>
 </div>
-
+console.log("🚀 Script is running!");
 <script>
 function copyToClipboard(id) {
     const text = document.getElementById('msg_' + id).innerText;

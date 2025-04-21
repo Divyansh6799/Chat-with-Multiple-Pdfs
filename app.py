@@ -98,7 +98,7 @@ def handle_userinput(user_question):
 def main():
     # load_dotenv()
     # Set the page configuration
-    st.set_page_config(page_title="PDFs Gyani | Chat with us",page_icon=":books:")
+    st.set_page_config(page_title="PDF's Gyani | Chat with us",page_icon=":books:")
     st.write(css, unsafe_allow_html=True)
 
     if "conversation" not in st.session_state:
@@ -106,7 +106,7 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    st.header("PDFs Gyani :books:")
+    st.header("PDF's Gyani :books:")
     st.subheader("Chat with your PDFs using Langchain and Streamlit")
     user_question = st.chat_input("Ask a question about your documents:")
     if user_question:
