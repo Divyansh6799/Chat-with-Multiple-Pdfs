@@ -12,15 +12,6 @@ from htmlTemplates import css, bot_template, user_template
 from langchain.llms import HuggingFaceHub
 from transformers import AutoTokenizer, AutoModel
 import os
-import subprocess
-import sys
-
-# Force install PyPDF2 if it's not found
-try:
-    from PyPDF2 import PdfReader
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "PyPDF2"])
-    from PyPDF2 import PdfReader
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
