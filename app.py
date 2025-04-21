@@ -82,8 +82,16 @@ def handle_userinput(user_question):
                     "{{MSG}}", message.content), unsafe_allow_html=True)
             else:
                 message_id = str(uuid.uuid4()).replace("-", "")
-                st.markdown(bot_template.replace(
-                    "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
+                # Replace both placeholders
+                rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
+
+                # Use st.markdown to see the raw HTML in debug
+                st.code(rendered_html, language="html")
+
+                # Render the actual UI
+                st.markdown(rendered_html, unsafe_allow_html=True)
+                # st.markdown(bot_template.replace(
+                #     "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
     except TypeError as e:
         # Handle the TypeError and display an error message
         print(f"TypeError: {e}")
@@ -107,7 +115,7 @@ def main():
         st.session_state.chat_history = []
 
     st.header("PDF's Gyani :books:")
-    st.subheader("Chat with your PDFs using Langchain and Streamlit")
+    st.subheader("Chat with your PDF's using Langchain and Streamlit")
     user_question = st.chat_input("Ask a question about your documents:")
     if user_question:
         handle_userinput(user_question)
