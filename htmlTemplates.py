@@ -27,30 +27,27 @@ css = '''
 }
 '''
 
-# Generate a unique ID for each message block to avoid conflicts
-import uuid
-message_id = str(uuid.uuid4()).replace("-", "")
-
 bot_template = '''
-<div class="chat-message bot">
+<div class="chat-message bot" style="position: relative; margin-bottom: 20px;">
     <div class="avatar">
         <img src="https://i.ibb.co/cN0nmSj/Screenshot-2023-05-28-at-02-37-21.png" style="max-height: 78px; max-width: 78px; border-radius: 50%; object-fit: cover;">
     </div>
-    <div class="message">{{MSG}}</div>
-    <button onclick="copyToClipboard('{message_id}')" style="position:absolute; top:10px; right:10px;">📋 Copy</button>
+    <div class="message" id="msg_{{ID}}">{{MSG}}</div>
+    <button onclick="copyToClipboard('{{ID}}')" style="position:absolute; top:10px; right:10px;">📋 Copy</button>
 </div>
 
 <script>
-function copyToClipboard(id) {{
+function copyToClipboard(id) {
     const text = document.getElementById('msg_' + id).innerText;
-        navigator.clipboard.writeText(text).then(function() {{
-            alert('Copied to clipboard!');
-        }}, function(err) {{
-            alert('Error copying text: ' + err);
-        }});
-}}
+    navigator.clipboard.writeText(text).then(function() {
+        alert('Copied to clipboard!');
+    }, function(err) {
+        alert('Error copying text: ' + err);
+    });
+}
 </script>
 '''
+
 
 user_template = '''
 <div class="chat-message user">

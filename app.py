@@ -81,8 +81,9 @@ def handle_userinput(user_question):
                 st.markdown(user_template.replace(
                     "{{MSG}}", message.content), unsafe_allow_html=True)
             else:
+                message_id = str(uuid.uuid4()).replace("-", "")
                 st.markdown(bot_template.replace(
-                    "{{MSG}}", message.content), unsafe_allow_html=True)
+                    "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
     except TypeError as e:
         # Handle the TypeError and display an error message
         print(f"TypeError: {e}")
