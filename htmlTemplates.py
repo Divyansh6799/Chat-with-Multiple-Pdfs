@@ -77,7 +77,6 @@ bot_template = '''
             position: relative;
         ">
             {{MSG}}
-
             <!-- Copy button INSIDE bubble -->
             <button onclick="copyToClipboard('{{ID}}')" style="
                 position: absolute;
@@ -171,7 +170,6 @@ user_template = '''
             position: relative;
         ">
             {{MSG}}
-
             <!-- Copy button INSIDE bubble -->
             <button onclick="copyToClipboard('{{ID}}')" style="
                 position: absolute;
