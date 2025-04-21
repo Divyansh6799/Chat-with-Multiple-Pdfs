@@ -49,7 +49,9 @@ AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 def get_vectorstore(text_chunks):
     # embeddings = OpenAIEmbeddings()
     # embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
+                                    model_kwargs={"device": "cuda"},
+                                    encode_kwargs={"normalize_embeddings": True})
     # embeddings = model.encode(text_chunks)
     # similarities = model.similarity(embeddings, embeddings)
     if os.path.exists("faiss_index"):
@@ -140,7 +142,7 @@ def main():
             
                 # get the text chunks
                 text_chunks = get_text_chunks(pdf_text)
-                st.write("Text Chunks:", text_chunks)
+                # st.write("Text Chunks:", text_chunks)
 
                 # create vector store
                 vectorstore = get_vectorstore(text_chunks)
