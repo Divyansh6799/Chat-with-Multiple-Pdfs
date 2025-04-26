@@ -13,7 +13,7 @@ from langchain.llms import HuggingFaceHub
 from transformers import AutoTokenizer, AutoModel
 import os
 import uuid
-
+import streamlit.components.v1 as components
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
@@ -73,8 +73,6 @@ def get_conversation_chain(vectorstore):
     )
     return conversation_chain
 
-import streamlit.components.v1 as components
-
 
 def handle_userinput(user_question):
     try:
@@ -84,7 +82,6 @@ def handle_userinput(user_question):
         for i, message in enumerate(st.session_state.chat_history):
             if i % 2 == 0:
                 message_id = str(uuid.uuid4()).replace("-", "")
-                # Replace both placeholders
                 rendered_html = user_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
                 components.html(rendered_html, height=200, scrolling=False)
 
