@@ -83,23 +83,11 @@ def handle_userinput(user_question):
             if i % 2 == 0:
                 message_id = str(uuid.uuid4()).replace("-", "")
                 rendered_html = user_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-                components.html(rendered_html, height=100, scrolling=False)
-
-                # st.markdown(user_template.replace(
-                #     "{{MSG}}", message.content), unsafe_allow_html=True)
+                components.html(rendered_html, height=70, scrolling=False)
             else:
                 message_id = str(uuid.uuid4()).replace("-", "")
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-                components.html(rendered_html, height=100, scrolling=False)
-
-                # Use st.markdown to see the raw HTML in debug
-                # st.code(rendered_html, language="html")
-
-                # Render the actual UI
-                # st.markdown(rendered_html, unsafe_allow_html=True)
-
-                # st.markdown(bot_template.replace(
-                #     "{{MSG}}", message.content).replace("{{ID}}", message_id), unsafe_allow_html=True)
+                components.html(rendered_html, height=70, scrolling=False)
     except TypeError as e:
         # Handle the TypeError and display an error message
         print(f"TypeError: {e}")
@@ -124,6 +112,11 @@ def main():
 
     st.header("PDF's Gyani :books:")
     st.subheader("Chat with your PDF's using Langchain and Streamlit")
+    audio_value = st.audio_input("Record a voice message")
+    if audio_value:
+        user_ques= st.text(audio_value)
+        handle_userinput(user_ques)
+
     user_question = st.chat_input("Ask a question about your documents:")
     if user_question:
         handle_userinput(user_question)
