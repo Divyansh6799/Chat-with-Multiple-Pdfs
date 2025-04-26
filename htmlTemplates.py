@@ -49,22 +49,18 @@ user_template = '''
     background-color: var(--chat-bg, #f5f5f5);
     border-radius: 12px;
     padding: 14px;
-    margin: 8px 0;
+    margin-bottom: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     max-width: 100%;
     position: relative;
     color: var(--text-color, #222);
     font-family: 'Segoe UI', sans-serif;
 ">
-    <!-- Avatar -->
     <div class="avatar" style="margin-right: 12px; flex-shrink: 0;">
         <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
              style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover;">
     </div>
-
-    <!-- Message bubble with button and tooltip inside -->
     <div style="flex-grow: 1; position: relative;">
-        <!-- Message bubble -->
         <div class="message" id="msg_{{ID}}" style="
             background-color: var(--bubble-bg, #ffffff);
             padding: 16px 48px 16px 16px;
@@ -77,8 +73,6 @@ user_template = '''
             position: relative;
         ">
             <span class="message-text">{{MSG}}</span>
-
-            <!-- Copy button -->
             <button onclick="copyToClipboard('{{ID}}')" style="
                 position: absolute;
                 top: 8px;
@@ -91,8 +85,6 @@ user_template = '''
                 cursor: pointer;
                 transition: background 0.2s ease;
             " title="Copy to clipboard">📋</button>
-
-            <!-- Tooltip -->
             <span id="tooltip_{{ID}}" style="
                 display: none;
                 position: absolute;
@@ -111,31 +103,7 @@ user_template = '''
         </div>
     </div>
 </div>
-
-<script>
-function copyToClipboard(id) {
-    const msgContainer = document.getElementById('msg_' + id);
-    const tooltip = document.getElementById('tooltip_' + id);
-    const textSpan = msgContainer.querySelector('.message-text');
-
-    if (!msgContainer || !tooltip || !textSpan) {
-        console.error('❌ Could not find required elements for ID:', id);
-        return;
-    }
-
-    const text = textSpan.innerText;
-    navigator.clipboard.writeText(text).then(function() {
-        tooltip.style.display = 'inline-block';
-        setTimeout(() => {
-            tooltip.style.display = 'none';
-        }, 1500);
-    }, function(err) {
-        alert('❌ Error copying text: ' + err);
-    });
-}
-</script>
 '''
-
 
 bot_template = '''
 <div class="chat-message bot" style="
@@ -144,22 +112,18 @@ bot_template = '''
     background-color: var(--chat-bg, #f5f5f5);
     border-radius: 12px;
     padding: 14px;
-    margin: 8px 0;
+    margin-bottom: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     max-width: 100%;
     position: relative;
     color: var(--text-color, #222);
     font-family: 'Segoe UI', sans-serif;
 ">
-    <!-- Avatar -->
     <div class="avatar" style="margin-right: 12px; flex-shrink: 0;">
         <img src="https://i.ibb.co/cN0nmSj/Screenshot-2023-05-28-at-02-37-21.png"
              style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover;">
     </div>
-
-    <!-- Message bubble with button and tooltip inside -->
     <div style="flex-grow: 1; position: relative;">
-        <!-- Message bubble -->
         <div class="message" id="msg_{{ID}}" style="
             background-color: var(--bubble-bg, #ffffff);
             padding: 16px 48px 16px 16px;
@@ -171,8 +135,7 @@ bot_template = '''
             color: var(--bubble-text, #000);
             position: relative;
         ">
-            {{MSG}}
-            <!-- Copy button INSIDE bubble -->
+            <span class="message-text">{{MSG}}</span>
             <button onclick="copyToClipboard('{{ID}}')" style="
                 position: absolute;
                 top: 8px;
@@ -185,8 +148,6 @@ bot_template = '''
                 cursor: pointer;
                 transition: background 0.2s ease;
             " title="Copy to clipboard">📋</button>
-
-            <!-- ✅ Copied tooltip inside bubble -->
             <span id="tooltip_{{ID}}" style="
                 display: none;
                 position: absolute;
@@ -205,28 +166,4 @@ bot_template = '''
         </div>
     </div>
 </div>
-
-<script>
-function copyToClipboard(id) {
-    const el = document.getElementById('msg_' + id);
-    const tooltip = document.getElementById('tooltip_' + id);
-
-    if (!el || !tooltip) {
-        console.error('❌ Could not find message or tooltip for ID:', id);
-        return;
-    }
-
-    const text = el.innerText;
-    navigator.clipboard.writeText(text).then(function() {
-        tooltip.style.display = 'inline-block';
-        setTimeout(() => {
-            tooltip.style.display = 'none';
-        }, 1500);
-    }, function(err) {
-        alert('❌ Error copying text: ' + err);
-    });
-}
-</script>
 '''
-
-

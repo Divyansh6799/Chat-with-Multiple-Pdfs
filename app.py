@@ -89,7 +89,6 @@ def handle_userinput(user_question):
                 #     "{{MSG}}", message.content), unsafe_allow_html=True)
             else:
                 message_id = str(uuid.uuid4()).replace("-", "")
-                # Replace both placeholders
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
                 components.html(rendered_html, height=200, scrolling=False)
 
