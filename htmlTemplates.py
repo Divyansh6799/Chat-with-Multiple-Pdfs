@@ -103,6 +103,29 @@ user_template = '''
         </div>
     </div>
 </div>
+
+<script>
+function copyToClipboard(id) {
+    const msgContainer = document.getElementById('msg_' + id);
+    const tooltip = document.getElementById('tooltip_' + id);
+    const textSpan = msgContainer.querySelector('.message-text');
+
+    if (!msgContainer || !tooltip || !textSpan) {
+        console.error('❌ Could not find required elements for ID:', id);
+        return;
+    }
+
+    const text = textSpan.innerText;
+    navigator.clipboard.writeText(text).then(function() {
+        tooltip.style.display = 'inline-block';
+        setTimeout(() => {
+            tooltip.style.display = 'none';
+        }, 1500);
+    }, function(err) {
+        alert('❌ Error copying text: ' + err);
+    });
+}
+</script>
 '''
 
 bot_template = '''
@@ -166,4 +189,27 @@ bot_template = '''
         </div>
     </div>
 </div>
+
+<script>
+function copyToClipboard(id) {
+    const msgContainer = document.getElementById('msg_' + id);
+    const tooltip = document.getElementById('tooltip_' + id);
+    const textSpan = msgContainer.querySelector('.message-text');
+
+    if (!msgContainer || !tooltip || !textSpan) {
+        console.error('❌ Could not find required elements for ID:', id);
+        return;
+    }
+
+    const text = textSpan.innerText;
+    navigator.clipboard.writeText(text).then(function() {
+        tooltip.style.display = 'inline-block';
+        setTimeout(() => {
+            tooltip.style.display = 'none';
+        }, 1500);
+    }, function(err) {
+        alert('❌ Error copying text: ' + err);
+    });
+}
+</script>
 '''
