@@ -112,11 +112,6 @@ def main():
 
     st.header("PDF's Gyani :books:")
     st.subheader("Chat with your PDF's using Langchain and Streamlit")
-    audio_value = st.audio_input("Record a voice message")
-    if audio_value:
-        user_ques= st.text(audio_value)
-        handle_userinput(user_ques)
-
     user_question = st.chat_input("Ask a question about your documents:")
     if user_question:
         handle_userinput(user_question)
