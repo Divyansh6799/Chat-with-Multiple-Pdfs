@@ -83,14 +83,14 @@ def handle_userinput(user_question):
             if i % 2 == 0:
                 message_id = str(uuid.uuid4()).replace("-", "")
                 rendered_html = user_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-                components.html(rendered_html, height=200, scrolling=False)
+                components.html(rendered_html, height=100, scrolling=False)
 
                 # st.markdown(user_template.replace(
                 #     "{{MSG}}", message.content), unsafe_allow_html=True)
             else:
                 message_id = str(uuid.uuid4()).replace("-", "")
                 rendered_html = bot_template.replace("{{MSG}}", message.content).replace("{{ID}}", message_id)
-                components.html(rendered_html, height=200, scrolling=False)
+                components.html(rendered_html, height=100, scrolling=False)
 
                 # Use st.markdown to see the raw HTML in debug
                 # st.code(rendered_html, language="html")
