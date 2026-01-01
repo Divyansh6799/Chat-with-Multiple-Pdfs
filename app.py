@@ -62,7 +62,17 @@ def get_vectorstore(text_chunks):
     return vectorstore
 
 def get_conversation_chain(vectorstore):
-    llm = HuggingFaceHub(repo_id="google/flan-t5-base", model_kwargs={"temperature":0.3, "max_length":100},task="text2text-generation")
+    from transformers import AutoModelForSeq2SeqLM, pipeline
+    model_id = 'google/flan-t5-base'
+
+    # 1. Load the correct model class for sequence-to-sequence
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+    # 2. Define the correct task for T5 models
+    llm = pipeline('text2text-generation', model=model, tokenizer=tokenizer, max_length=100, temperature=0.3)
+
+    # llm = HuggingFaceHub(repo_id="google/flan-t5-base", model_kwargs={"temperature":0.3, "max_length":100},task="text2text-generation")
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
     conversation_chain = ConversationalRetrievalChain.from_llm(
