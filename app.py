@@ -15,7 +15,7 @@ import os
 import uuid
 import streamlit.components.v1 as components
 
-openai_api_key = st.secrets["OPENAI_API_KEY"]
+# openai_api_key = st.secrets["OPENAI_API_KEY"]
 hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 def get_pdf_text(uploaded_files):
