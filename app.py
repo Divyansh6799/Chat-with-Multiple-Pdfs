@@ -92,7 +92,7 @@ def handle_userinput(user_question):
         # Handle the TypeError and display an error message
         print(f"TypeError: {e}")
         st.session_state.chat_history = []
-        st.warning("Please upload PDF files in the left sidebar and process them before asking questions.")
+        st.warning("Please upload PDF files in the left sidebar and process them before asking questions. Thank you!")
     except Exception as e:
         # Handle any other exceptions and display an error message
         st.error(f"An error occurred: {e}")
