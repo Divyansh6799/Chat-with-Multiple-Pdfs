@@ -16,6 +16,7 @@ import uuid
 import streamlit.components.v1 as components
 from langchain.llms import HuggingFacePipeline
 from transformers import pipeline
+import shutil
 
 # openai_api_key = st.secrets["OPENAI_API_KEY"]
 hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
@@ -48,7 +49,7 @@ def get_text_chunks(pdf_text):
 AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 
-def get_vectorstore(text_chunks):
+def get_vectorstore(text_chunks, reset_index=False):
     # embeddings = OpenAIEmbeddings()
     # embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
@@ -56,6 +57,9 @@ def get_vectorstore(text_chunks):
                                     encode_kwargs={"normalize_embeddings": True})
     # embeddings = model.encode(text_chunks)
     # similarities = model.similarity(embeddings, embeddings)
+    if reset_index and os.path.exists("faiss_index"):
+        shutil.rmtree("faiss_index")
+
     if os.path.exists("faiss_index"):
         vectorstore = FAISS.load_local("faiss_index", embeddings,allow_dangerous_deserialization=True)
     else:
@@ -84,7 +88,6 @@ def get_conversation_chain(vectorstore):
 
 def handle_userinput(user_question):
     try:
-
         response = st.session_state.conversation({'question': user_question})
         st.session_state.chat_history = response['chat_history']
         for i, message in enumerate(st.session_state.chat_history):
