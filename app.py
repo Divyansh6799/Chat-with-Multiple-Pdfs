@@ -14,6 +14,8 @@ from transformers import AutoTokenizer, AutoModel
 import os
 import uuid
 import streamlit.components.v1 as components
+from langchain.llms import HuggingFacePipeline
+from transformers import pipeline
 
 # openai_api_key = st.secrets["OPENAI_API_KEY"]
 hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
@@ -62,7 +64,14 @@ def get_vectorstore(text_chunks):
     return vectorstore
 
 def get_conversation_chain(vectorstore):
-    llm = HuggingFaceHub(repo_id="google/flan-t5-large", model_kwargs={"temperature":0.3, "max_length":100})
+    # llm = HuggingFaceHub(repo_id="google/flan-t5-large", model_kwargs={"temperature":0.3, "max_length":100},task="text2text-generation")
+    pipe = pipeline(
+        "text2text-generation",
+        model="google/flan-t5-large",
+        max_new_tokens=100,
+        temperature=0.3
+    )
+    llm = HuggingFacePipeline(pipeline=pipe)
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
     conversation_chain = ConversationalRetrievalChain.from_llm(
